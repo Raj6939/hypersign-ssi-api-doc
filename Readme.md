@@ -115,8 +115,7 @@ Headers:
                 "service": []
               },
               "verificationMethodId":"did:hid:testnet:z6y1cC2BCFw2ZoAcxcSZNAFE87xSQNqoGTAR4xxoWFD9#key-1"
-          }
-   ```
+          }   
 
 Response
 
@@ -163,7 +162,7 @@ Response
              }
            }
          }
-   ```
+  ```
 
   3. Create Schema for credetnial
   Create schema here https://entity.hypersign.id/#/studio/playground/dashboard at entity studio and copy the schema Id
@@ -190,6 +189,3 @@ Response
       "persist": true,
       "registerCredentialStatus": true
     }
-```
-  
-   
