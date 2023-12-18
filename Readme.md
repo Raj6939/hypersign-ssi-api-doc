@@ -164,5 +164,32 @@ Response
            }
          }
    ```
+
+  3. Create Schema for credetnial
+  Create schema here https://entity.hypersign.id/#/studio/playground/dashboard at entity studio and copy the schema Id
+
+  4. Issue Credential for above copied schema
+
+  Method: POST
+
+  URL:https://api.entity.hypersign.id/api/v1/credential/issue
+
+  Body:
+
+  ```
+    {
+      "schemaId": "string",             //Schema ID copied above
+      "subjectDid": "string",           // DID of the Subject
+      "issuerDid": "string",            // Issuer DID
+      "expirationDate": "2027-12-10T18:30:00.000Z",  //Add expiry according to your requirement
+      "fields": {
+        "name": "value"                 //for value you can enter name of the Subject
+      },
+      "namespace": "testnet",
+      "verificationMethodId": "{issuerDID}#key-1",   //Issuer DID and append #key-1 at last
+      "persist": true,
+      "registerCredentialStatus": true
+    }
+```
   
    
