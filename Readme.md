@@ -252,12 +252,13 @@ Response
       "persist": true
     }
 ```
-
+  > Copy the Credential Document Object from above response upto `proof` object and paste it in below `credentialDocuments` Array to generate VP. Additionally add Subject DID in holder DID field and add         a random challenge in `challenge` field. keep domain as it is.
+  
   5. Create Verifiable Presentation
 
   Method: POST
 
-  URL:
+  URL: https://api.entity.hypersign.id/api/v1/presentation
 
   Body:
 
@@ -384,4 +385,207 @@ Response
   }
 }
 ```
-  
+> Now we need to verify the above Verifiable Presentation. Copy the above entire response and paste as it is in body of below  `verify` API and call it.
+
+6. Verify Verifiable Presentation
+
+Method: POST
+
+URL: https://api.entity.hypersign.id/api/v1/presentation/verify
+
+Body:
+
+```
+{
+  "presentation": {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      "https://w3id.org/security/suites/ed25519-2020/v1"
+    ],
+    "type": [
+      "VerifiablePresentation"
+    ],
+    "verifiableCredential": [
+      {
+        "@context": [
+          "https://www.w3.org/2018/credentials/v1",
+          {
+            "hs": "https://api.jagrat.hypersign.id/hypersign-protocol/hidnode/ssi/schema/sch:hid:testnet:zEinwkuP5XUtU2AmArh4rqbCLbwzZRebBQzitCSafiiSG:1.0:"
+          },
+          {
+            "name": "hs:name"
+          },
+          {
+            "rollNo": "hs:rollNo"
+          },
+          "https://w3id.org/security/suites/ed25519-2020/v1"
+        ],
+        "id": "vc:hid:testnet:zDm9qhMncSGnudGYquzz3mGfV8yahS4yKcWmeWTb5pcxe",
+        "type": [
+          "VerifiableCredential",
+          "Degree"
+        ],
+        "expirationDate": "2027-12-10T18:30:00Z",
+        "issuanceDate": "2023-12-18T13:31:00Z",
+        "issuer": "did:hid:testnet:z6y1cC2BCFw2ZoAcxcSZNAFE87xSQNqoGTAR4xxoWFD9",
+        "credentialSubject": {
+          "name": "Raj",
+          "rollNo": 20,
+          "id": "did:hid:testnet:z2ikbFoMbenw3ajCd5jVzrncCXycdkbeAWte3nLpdrjHu"
+        },
+        "credentialSchema": {
+          "id": "sch:hid:testnet:zEinwkuP5XUtU2AmArh4rqbCLbwzZRebBQzitCSafiiSG:1.0",
+          "type": "JsonSchemaValidator2018"
+        },
+        "credentialStatus": {
+          "id": "https://api.jagrat.hypersign.id/hypersign-protocol/hidnode/ssi/credential/vc:hid:testnet:zDm9qhMncSGnudGYquzz3mGfV8yahS4yKcWmeWTb5pcxe",
+          "type": "CredentialStatusList2017"
+        },
+        "proof": {
+          "type": "Ed25519Signature2020",
+          "created": "2023-12-18T13:32:40Z",
+          "verificationMethod": "did:hid:testnet:z6y1cC2BCFw2ZoAcxcSZNAFE87xSQNqoGTAR4xxoWFD9#key-1",
+          "proofPurpose": "assertionMethod",
+          "proofValue": "z3dW8HXSzSQv2khSAAHZSNa6WC16YR6dpQFAxvwN8NMvkfxFsKKxXfDpNJiZbnHUwNUjv7Dq41zWmcsU7xfiyiLg3"
+        }
+      }
+    ],
+    "id": "vp:hid:testnet:z6hkcEGWy4yy6S51pMqZb6Ds6imws4Ukm5rApyv4yxJdj",
+    "holder": "did:hid:testnet:z2ikbFoMbenw3ajCd5jVzrncCXycdkbeAWte3nLpdrjHu",
+    "proof": {
+      "type": "Ed25519Signature2020",
+      "created": "2023-12-18T13:37:24Z",
+      "verificationMethod": "did:hid:testnet:z2ikbFoMbenw3ajCd5jVzrncCXycdkbeAWte3nLpdrjHu#key-1",
+      "proofPurpose": "authentication",
+      "challenge": "Raj",
+      "proofValue": "z4iNMU6t32Y9cjdYVmV5npQWXxJVGdqtzb4S8Wvf3RzziiEbvTnmpQ7UbGNFc4wdR6yVZR915TFVkHiugUf6mdpT4"
+    }
+  }
+}
+```
+
+Response: 
+
+```
+{
+  "verified": true,
+  "results": [
+    {
+      "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://w3id.org/security/suites/ed25519-2020/v1"
+      ],
+      "type": [
+        "VerifiablePresentation"
+      ],
+      "verifiableCredential": [
+        {
+          "@context": [
+            "https://www.w3.org/2018/credentials/v1",
+            {
+              "hs": "https://api.jagrat.hypersign.id/hypersign-protocol/hidnode/ssi/schema/sch:hid:testnet:zEinwkuP5XUtU2AmArh4rqbCLbwzZRebBQzitCSafiiSG:1.0:"
+            },
+            {
+              "name": "hs:name"
+            },
+            {
+              "rollNo": "hs:rollNo"
+            },
+            "https://w3id.org/security/suites/ed25519-2020/v1"
+          ],
+          "id": "vc:hid:testnet:zDm9qhMncSGnudGYquzz3mGfV8yahS4yKcWmeWTb5pcxe",
+          "type": [
+            "VerifiableCredential",
+            "Degree"
+          ],
+          "expirationDate": "2027-12-10T18:30:00Z",
+          "issuanceDate": "2023-12-18T13:31:00Z",
+          "issuer": "did:hid:testnet:z6y1cC2BCFw2ZoAcxcSZNAFE87xSQNqoGTAR4xxoWFD9",
+          "credentialSubject": {
+            "name": "Raj",
+            "rollNo": 20,
+            "id": "did:hid:testnet:z2ikbFoMbenw3ajCd5jVzrncCXycdkbeAWte3nLpdrjHu"
+          },
+          "credentialSchema": {
+            "id": "sch:hid:testnet:zEinwkuP5XUtU2AmArh4rqbCLbwzZRebBQzitCSafiiSG:1.0",
+            "type": "JsonSchemaValidator2018"
+          },
+          "credentialStatus": {
+            "id": "https://api.jagrat.hypersign.id/hypersign-protocol/hidnode/ssi/credential/vc:hid:testnet:zDm9qhMncSGnudGYquzz3mGfV8yahS4yKcWmeWTb5pcxe",
+            "type": "CredentialStatusList2017"
+          },
+          "proof": {
+            "type": "Ed25519Signature2020",
+            "created": "2023-12-18T13:32:40Z",
+            "verificationMethod": "did:hid:testnet:z6y1cC2BCFw2ZoAcxcSZNAFE87xSQNqoGTAR4xxoWFD9#key-1",
+            "proofPurpose": "assertionMethod",
+            "proofValue": "z3dW8HXSzSQv2khSAAHZSNa6WC16YR6dpQFAxvwN8NMvkfxFsKKxXfDpNJiZbnHUwNUjv7Dq41zWmcsU7xfiyiLg3"
+          }
+        }
+      ],
+      "id": "vp:hid:testnet:z6hkcEGWy4yy6S51pMqZb6Ds6imws4Ukm5rApyv4yxJdj",
+      "holder": "did:hid:testnet:z2ikbFoMbenw3ajCd5jVzrncCXycdkbeAWte3nLpdrjHu",
+      "proof": {
+        "type": "Ed25519Signature2020",
+        "created": "2023-12-18T13:37:24Z",
+        "verificationMethod": "did:hid:testnet:z2ikbFoMbenw3ajCd5jVzrncCXycdkbeAWte3nLpdrjHu#key-1",
+        "proofPurpose": "authentication",
+        "challenge": "Raj",
+        "proofValue": "z4iNMU6t32Y9cjdYVmV5npQWXxJVGdqtzb4S8Wvf3RzziiEbvTnmpQ7UbGNFc4wdR6yVZR915TFVkHiugUf6mdpT4"
+      }
+    }
+  ],
+  "credentialResults": [
+    {
+      "verified": true,
+      "results": [
+        {
+          "proof": {
+            "@context": [
+              "https://www.w3.org/2018/credentials/v1",
+              {
+                "hs": "https://api.jagrat.hypersign.id/hypersign-protocol/hidnode/ssi/schema/sch:hid:testnet:zEinwkuP5XUtU2AmArh4rqbCLbwzZRebBQzitCSafiiSG:1.0:"
+              },
+              {
+                "name": "hs:name"
+              },
+              {
+                "rollNo": "hs:rollNo"
+              },
+              "https://w3id.org/security/suites/ed25519-2020/v1"
+            ],
+            "type": "Ed25519Signature2020",
+            "created": "2023-12-18T13:32:40Z",
+            "verificationMethod": "did:hid:testnet:z6y1cC2BCFw2ZoAcxcSZNAFE87xSQNqoGTAR4xxoWFD9#key-1",
+            "proofPurpose": "assertionMethod",
+            "proofValue": "z3dW8HXSzSQv2khSAAHZSNa6WC16YR6dpQFAxvwN8NMvkfxFsKKxXfDpNJiZbnHUwNUjv7Dq41zWmcsU7xfiyiLg3"
+          },
+          "verified": true,
+          "verificationMethod": {
+            "id": "did:hid:testnet:z6y1cC2BCFw2ZoAcxcSZNAFE87xSQNqoGTAR4xxoWFD9#key-1",
+            "type": "Ed25519VerificationKey2020",
+            "controller": "did:hid:testnet:z6y1cC2BCFw2ZoAcxcSZNAFE87xSQNqoGTAR4xxoWFD9",
+            "publicKeyMultibase": "z6MkeZE4CSGcXoRVgJ1KeBQQDFoDwhEHpG69xU5LuEvpRTzX"
+          },
+          "purposeResult": {
+            "valid": true,
+            "controller": {
+              "@context": "https://w3id.org/security/v2",
+              "id": "did:hid:testnet:z6y1cC2BCFw2ZoAcxcSZNAFE87xSQNqoGTAR4xxoWFD9",
+              "assertionMethod": [
+                "did:hid:testnet:z6y1cC2BCFw2ZoAcxcSZNAFE87xSQNqoGTAR4xxoWFD9#key-1"
+              ]
+            }
+          }
+        }
+      ],
+      "statusResult": {
+        "verified": true
+      },
+      "credentialId": "vc:hid:testnet:zDm9qhMncSGnudGYquzz3mGfV8yahS4yKcWmeWTb5pcxe"
+    }
+  ]
+}
+```
+
+Now your Verifiable Presentation is verified cryptographically
